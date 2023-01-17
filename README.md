@@ -1,3 +1,3 @@
-##TODO
+### TODO
+- [ ] redux installation
 
-    - [ ] : redux, toolkit install
