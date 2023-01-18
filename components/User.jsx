@@ -2,8 +2,8 @@ import React from "react";
 
 function User() {
   return (
-    <div className="flex justify-center pt-10">
-      <div className="border border-gray-700 rounded-lg p-2">
+    <div>
+      <div className="border border-gray-700 rounded-lg p-2 w-[500px]">
         <div className=" flex p-2 [&>*]:bg-gray-200 [&>*]:p-2 flex-col items-center">
           <p className="text-2xl">Name</p>
           <p className="text-xl">username</p>
