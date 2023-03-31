@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotevn from "dotenv";
 import bodyParser from "body-parser";
+import connect from "../config/database";
 
 dotevn.config();
 const app: Application = express();
@@ -17,6 +18,8 @@ app.get("/", (req: Request, res: Response): void => {
   });
 });
 
-app.listen(PORT, (): void => {
+app.listen(PORT, async (): Promise<void> => {
   console.log(`Server is listening on PORT:${PORT}`);
+
+  await connect();
 });
