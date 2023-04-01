@@ -1,4 +1,4 @@
-interface ITodo {
+export interface ITodo {
   _id: string;
   name: string;
   description: string;
@@ -7,13 +7,12 @@ interface ITodo {
   updatedAt?: string;
 }
 
-interface TodoProps {
+export interface TodoProps {
   todo: ITodo;
 }
 
-type ApiDataType = {
+export type ApiDataType = {
   message: string;
   status: string;
   todos: ITodo[];
-  todo?: ITodo;
 };
