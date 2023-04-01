@@ -3,7 +3,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const dburi = "mongodb://localhost:27017/TodoCluster";
+if (!process.env.MONGODB_URI) {
+  throw new Error("MONGODB_URI environment variable is not set.");
+}
+
+const dburi: string = process.env.MONGODB_URI;
 
 function connect() {
   const db = mongoose
