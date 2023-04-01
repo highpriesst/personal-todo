@@ -31,11 +31,13 @@ export const addTodo = async (
       description: body.description,
       completed: body.completed,
     });
-    //Validate the todo object
-    await todo.validate();
 
     //Saving the new todo
-    const newTodo = await todo.save();
+    // const newTodo = await todo.save().then(() => {
+    //   console.log("Saved successfuly!");
+    // });
+
+    const newTodo = Todo.create(todo);
 
     //Getting all todos to show all todos to the user.
     const allTodos: ITodo[] = await Todo.find();
