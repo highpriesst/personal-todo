@@ -4,6 +4,7 @@ import dotevn from "dotenv";
 import bodyParser from "body-parser";
 import connect from "../config/database";
 import router from "../routes/todo.route";
+import { errorHandler } from "../utils/error-handler";
 
 dotevn.config();
 const app: Application = express();
@@ -14,6 +15,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(router);
+
+app.use(errorHandler);
 
 app.listen(PORT, async (): Promise<void> => {
   console.log(`Server is listening on PORT:${PORT}`);
