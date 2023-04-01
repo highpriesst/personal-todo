@@ -13,10 +13,15 @@ const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(router);
 
 app.use(errorHandler);
+
+app.get("/", (req, res) => {
+  res.send("Its up");
+});
 
 app.listen(PORT, async (): Promise<void> => {
   console.log(`Server is listening on PORT:${PORT}`);

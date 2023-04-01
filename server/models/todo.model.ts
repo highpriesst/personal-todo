@@ -1,17 +1,15 @@
-import mongoose from "mongoose";
+import { model, Schema } from "mongoose";
+import { ITodo } from "../types/todo.types";
 
-interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
-}
+const TodoSchema: Schema = new Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    completed: { type: Boolean, default: false },
+  },
+  { timestamps: true }
+);
 
-const TodoSchema = new mongoose.Schema<Todo>({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  completed: { type: Boolean, default: false },
-});
+const Todo = model<ITodo>("Todo", TodoSchema);
 
-const TodoModel = mongoose.model<Todo>("Todo", TodoSchema);
-
-export default TodoModel;
+export default Todo;
