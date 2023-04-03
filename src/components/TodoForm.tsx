@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
-interface TodoFormData {
-  title: string;
-  description: string;
-  completed: boolean;
-}
+import { TodoFormData } from "../types/todo.types";
 
 const defaultTodoFormData: TodoFormData = {
   title: "",

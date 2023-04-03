@@ -1,12 +1,4 @@
-import React from "react";
-import { colors } from "tailwindcss/defaultTheme";
-
-interface ITodoProps {
-  index: number;
-  title: string;
-  description: string;
-  completed: boolean;
-}
+import { ITodoProps } from "../types/todo.types";
 
 const colorVariants = {
   notFinished:
