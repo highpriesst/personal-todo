@@ -1,8 +1,8 @@
 export interface ITodo {
   _id: string;
-  name: string;
+  title: string;
   description: string;
-  status: boolean;
+  completed: boolean;
   createdAt?: string;
   updatedAt?: string;
 }

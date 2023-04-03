@@ -18,7 +18,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App flex items-center justify-center flex-col">
       <h2>TODO APP</h2>
       {/* <TodoList /> */}
       <TodoForm />
