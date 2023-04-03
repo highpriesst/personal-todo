@@ -1,38 +1,26 @@
-import axios, { AxiosResponse } from "axios";
-import { ApiDataType, ITodo } from "../types/todo.types";
+import useTodos from "../hooks/useTodos";
 
-const baseUrl: string = "http://localhost:3000";
+function TodoList() {
+  const { todos } = useTodos();
+  return (
+    <div>
+      <div>
+        <h1>todolist</h1>
+      </div>
+      <div>
+        <ul className="flex gap-5 flex-col p-2">
+          {todos.map((item, index) => {
+            return (
+              <li key={index}>
+                <span>Title {item.title}</span>
+                <span>Description {item.description}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
-export const getTodos = async (): Promise<AxiosResponse<ApiDataType>> => {
-  try {
-    const todos: AxiosResponse<ApiDataType> = await axios.get(
-      baseUrl + "/api/todos"
-    );
-    console.log(todos.data.todos);
-
-    return todos;
-  } catch (error) {
-    throw new Error();
-  }
-};
-
-export const addTodo = async (
-  formdata: ITodo
-): Promise<AxiosResponse<ApiDataType>> => {
-  try {
-    const todo: Omit<ITodo, "_id"> = {
-      title: formdata.title,
-      description: formdata.description,
-      completed: false,
-    };
-
-    const savedTodo: AxiosResponse<ApiDataType> = await axios.post(
-      baseUrl + "/api/todos",
-      todo
-    );
-
-    return savedTodo;
-  } catch (error) {
-    throw new Error();
-  }
-};
+export default TodoList;
