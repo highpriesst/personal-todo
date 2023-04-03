@@ -16,3 +16,16 @@ export type ApiDataType = {
   status: string;
   todos: ITodo[];
 };
+
+export interface ITodoProps {
+  index: number;
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+export interface TodoFormData {
+  title: string;
+  description: string;
+  completed: boolean;
+}
