@@ -1,23 +1,25 @@
 import useTodos from "../hooks/useTodos";
+import Todo from "./Todo";
 
 function TodoList() {
   const { todos } = useTodos();
   return (
     <div>
       <div>
-        <h1>todolist</h1>
+        <h1>Todays work</h1>
       </div>
       <div>
-        <ul className="flex gap-5 flex-col p-2">
-          {todos.map((item, index) => {
-            return (
-              <li key={index}>
-                <span>Title {item.title}</span>
-                <span>Description {item.description}</span>
-              </li>
-            );
-          })}
-        </ul>
+        {todos.map(({ title, description, completed }, index) => {
+          return (
+            <Todo
+              index={index}
+              key={index}
+              title={title}
+              description={description}
+              completed={completed}
+            />
+          );
+        })}
       </div>
     </div>
   );
