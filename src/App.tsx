@@ -1,27 +1,14 @@
-import { getTodos } from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
-import { useEffect, useState } from "react";
-
-import { TodoProps, ITodo } from "./types/todo.types";
+import TodoList from "./components/TodoList";
 
 function App() {
-  const [todos, setTodos] = useState<ITodo[]>([]);
-
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
-  const fetchTodos = (): void => {
-    getTodos()
-      .then(({ data: { todos } }: ITodo[] | any) => setTodos(todos))
-      .catch((err: Error) => console.log(err));
-  };
-
   return (
     <div className="App flex items-center justify-center flex-col">
       <h2>TODO APP</h2>
-      {/* <TodoList /> */}
-      <TodoForm />
+      <div className="flex gap-10">
+        <TodoForm />
+        <TodoList />
+      </div>
     </div>
   );
 }
