@@ -1,2 +1,1 @@
-TODO: 
-    Add Firebase before deploying
+My personal Todo-Pomodoro Website in dev.
