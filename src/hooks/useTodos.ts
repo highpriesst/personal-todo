@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 import { getTodos } from "../utils/helper";
-
-interface ITodo {
-  id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-}
+import { ITodo } from "../types/todo.types";
 
 const useTodos = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
