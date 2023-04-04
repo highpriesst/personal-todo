@@ -25,17 +25,13 @@ export const addTodo = async (
   try {
     //Picking specific things from req.body
     const body = req.body as Pick<ITodo, "title" | "description" | "completed">;
+
     //Creating new Todo from picked information
     const todo: ITodo = new Todo({
       title: body.title,
       description: body.description,
       completed: body.completed,
     });
-
-    //Saving the new todo
-    // const newTodo = await todo.save().then(() => {
-    //   console.log("Saved successfuly!");
-    // });
 
     const newTodo = Todo.create(todo);
 
@@ -53,34 +49,6 @@ export const addTodo = async (
     throw error;
   }
 };
-
-// export const updateTodo = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const {
-//       params: { id },
-//       body,
-//     } = req;
-
-//     const updatedTodo: ITodo | null = await Todo.findByIdAndUpdate(id, body, {
-//       new: true,
-//     });
-
-//     const allTodos: ITodo[] = await Todo.find();
-//     res.status(200).json({
-//       message: "Todo Updated",
-//       todo: updatedTodo,
-//       todos: allTodos,
-//     });
-//   } catch (error) {
-//     res.status(500).send("Something went wrong!");
-//     next(error);
-//     throw error;
-//   }
-// };
 
 export const updateTodo = async (
   req: Request,
