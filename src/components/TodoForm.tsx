@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import useTodoForm from "../hooks/useFormData";
 import axios from "axios";
 import { TodoFormData } from "../types/todo.types";
+import { useState } from "react";
 
 const defaultTodoFormData: TodoFormData = {
   title: "",
@@ -9,24 +10,7 @@ const defaultTodoFormData: TodoFormData = {
 };
 
 const TodoForm = () => {
-  const [formData, setFormData] = useState<TodoFormData>(defaultTodoFormData);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    try {
-      await axios.post("http://localhost:3000/api/todos", formData);
-      setFormData(defaultTodoFormData);
-      // alert("Added");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { formData, handleChange, handleSubmit } = useTodoForm();
 
   return (
     <div className="border p-5">
@@ -69,12 +53,7 @@ const TodoForm = () => {
               name="completed"
               id="completed"
               checked={formData.completed}
-              onChange={(event) =>
-                setFormData({
-                  ...formData,
-                  completed: event.target.checked,
-                })
-              }
+              onChange={handleChange}
             />
             <label
               htmlFor="completed"
