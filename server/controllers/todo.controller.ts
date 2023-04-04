@@ -53,3 +53,59 @@ export const addTodo = async (
     throw error;
   }
 };
+
+// export const updateTodo = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const {
+//       params: { id },
+//       body,
+//     } = req;
+
+//     const updatedTodo: ITodo | null = await Todo.findByIdAndUpdate(id, body, {
+//       new: true,
+//     });
+
+//     const allTodos: ITodo[] = await Todo.find();
+//     res.status(200).json({
+//       message: "Todo Updated",
+//       todo: updatedTodo,
+//       todos: allTodos,
+//     });
+//   } catch (error) {
+//     res.status(500).send("Something went wrong!");
+//     next(error);
+//     throw error;
+//   }
+// };
+
+export const updateTodo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const {
+      params: { id },
+      body,
+    } = req;
+
+    const updatedTodo: ITodo | null = await Todo.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+
+    const allTodos: ITodo[] = await Todo.find();
+    res.status(200).json({
+      message: "Todo Updated",
+      todo: updatedTodo,
+      todos: allTodos,
+    });
+  } catch (error) {
+    res.status(500).send("Something went wrong!");
+    next(error);
+    throw error;
+  }
+};
