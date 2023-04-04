@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosStatic } from "axios";
 import { ApiDataType, ITodo } from "../types/todo.types";
 
 const baseUrl: string = "http://localhost:3000";
@@ -38,5 +38,26 @@ export const addTodo = async (
 };
 
 //Update
+
+export const updateTodo = async (
+  todo: ITodo
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const todoUpdate: Pick<ITodo, "completed"> = {
+      completed: !todo.completed,
+    };
+    const updatedTodo: AxiosResponse<ApiDataType> = await axios.put(
+      `${baseUrl}/edit/${todo._id}`,
+      todoUpdate
+    );
+
+    console.log(updatedTodo);
+
+    return updatedTodo;
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+};
 
 //Delete
