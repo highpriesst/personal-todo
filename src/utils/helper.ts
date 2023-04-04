@@ -39,9 +39,31 @@ export const addTodo = async (
 
 //Update
 
+// export const updateTodo = async (
+//   todo: ITodo
+// ): Promise<AxiosResponse<ApiDataType>> => {
+//   try {
+//     const todoUpdate: Pick<ITodo, "completed"> = {
+//       completed: !todo.completed,
+//     };
+//     const updatedTodo: AxiosResponse<ApiDataType> = await axios.put(
+//       `${baseUrl}/edit/${todo._id}`,
+//       todoUpdate
+//     );
+
+//     console.log(updatedTodo);
+
+//     return updatedTodo;
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error();
+//   }
+// };
+
 export const updateTodo = async (
-  todo: ITodo
-): Promise<AxiosResponse<ApiDataType>> => {
+  todo: ITodo,
+  setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>
+): Promise<void> => {
   try {
     const todoUpdate: Pick<ITodo, "completed"> = {
       completed: !todo.completed,
@@ -50,10 +72,18 @@ export const updateTodo = async (
       `${baseUrl}/edit/${todo._id}`,
       todoUpdate
     );
-
-    console.log(updatedTodo);
-
-    return updatedTodo;
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.map((todoItem) => {
+        if (todoItem._id === todo._id) {
+          return {
+            ...todoItem,
+            completed: !todo.completed,
+          };
+        }
+        return todoItem;
+      });
+      return updatedTodos;
+    });
   } catch (error) {
     console.log(error);
     throw new Error();
