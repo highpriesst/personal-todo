@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getTodos } from "../utils/helper";
 import { ITodo } from "../types/todo.types";
+import { updateTodo } from "../utils/helper";
 
 const useTodos = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
@@ -19,7 +20,24 @@ const useTodos = () => {
       });
   };
 
-  return { todos, setTodos, error };
+  const handleUpdateTodo = (todo: ITodo): void => {
+    updateTodo(todo, setTodos).catch((err) => console.log(err));
+
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.map((todoItem) => {
+        if (todoItem._id === todo._id) {
+          return {
+            ...todoItem,
+            completed: !todo.completed,
+          };
+        }
+        return todoItem;
+      });
+      return updatedTodos;
+    });
+  };
+
+  return { todos, setTodos, error, handleUpdateTodo };
 };
 
 export default useTodos;
