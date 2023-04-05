@@ -7,13 +7,18 @@ import { getTodos, addTodo, updateTodo } from "./utils/helper";
 
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
-  const [error, setError] = useState<string>("");
+  const [status, setStatus] = useState<"loading" | "completed" | "failed">(
+    "loading"
+  );
 
   const fetchTodos = (): void => {
     getTodos()
-      .then(({ data: { todos } }: ITodo[] | any) => setTodos(todos))
+      .then(({ data: { todos } }: ITodo[] | any) => {
+        setTodos(todos);
+        setStatus("completed");
+      })
       .catch((err: Error) => {
-        setError(err.message);
+        setStatus("failed");
         console.log(err);
       });
   };
@@ -48,16 +53,19 @@ function App() {
   useEffect(() => {
     fetchTodos();
   }, [setTodos]);
-  return (
-    <div className="App flex items-center justify-center flex-col">
-      <h1 className="font-bold text-3xl pb-10">Todo App</h1>
-      <div className="flex gap-10 justify-evenly">
-        <div>
-          <TodoForm handleAddTodo={handleAddTodo} />
-        </div>
-        {error ? (
-          <div>Something went Wrong!</div>
-        ) : (
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  } else if (status === "failed") {
+    return <div>Failed to fetch todos</div>;
+  } else {
+    return (
+      <div className="App flex items-center justify-center flex-col">
+        <h1 className="font-bold text-3xl pb-10">Todo App</h1>
+        <div className="flex gap-10 justify-evenly">
+          <div>
+            <TodoForm handleAddTodo={handleAddTodo} />
+          </div>
           <div>
             {todos.map((todo: ITodo) => (
               <Todo
@@ -67,10 +75,10 @@ function App() {
               />
             ))}
           </div>
-        )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
