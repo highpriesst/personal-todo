@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosStatic } from "axios";
-import { ApiDataType, ITodo } from "../types/todo.types";
+import { ApiDataType, ITodo, ITodoForm } from "../types/todo.types";
 
 const baseUrl: string = "http://localhost:3000";
 
@@ -17,75 +17,42 @@ export const getTodos = async (): Promise<AxiosResponse<ApiDataType>> => {
 };
 
 export const addTodo = async (
-  formdata: ITodo
+  formData: ITodoForm
 ): Promise<AxiosResponse<ApiDataType>> => {
   try {
     const todo: Omit<ITodo, "_id"> = {
-      title: formdata.title,
-      description: formdata.description,
+      title: formData.title,
+      description: formData.description,
       completed: false,
     };
-
-    const savedTodo: AxiosResponse<ApiDataType> = await axios.post(
+    const saveTodo: AxiosResponse<ApiDataType> = await axios.post(
       baseUrl + "/api/todos",
       todo
     );
+    // console.log(formData);
 
-    return savedTodo;
+    return saveTodo;
   } catch (error) {
+    console.log(formData);
     throw new Error();
   }
 };
 
 //Update
 
-// export const updateTodo = async (
-//   todo: ITodo
-// ): Promise<AxiosResponse<ApiDataType>> => {
-//   try {
-//     const todoUpdate: Pick<ITodo, "completed"> = {
-//       completed: !todo.completed,
-//     };
-//     const updatedTodo: AxiosResponse<ApiDataType> = await axios.put(
-//       `${baseUrl}/edit/${todo._id}`,
-//       todoUpdate
-//     );
-
-//     console.log(updatedTodo);
-
-//     return updatedTodo;
-//   } catch (error) {
-//     console.log(error);
-//     throw new Error();
-//   }
-// };
-
 export const updateTodo = async (
-  todo: ITodo,
-  setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>
-): Promise<void> => {
+  todo: ITodo
+): Promise<AxiosResponse<ApiDataType>> => {
   try {
     const todoUpdate: Pick<ITodo, "completed"> = {
-      completed: !todo.completed,
+      completed: true,
     };
     const updatedTodo: AxiosResponse<ApiDataType> = await axios.put(
       `${baseUrl}/edit/${todo._id}`,
       todoUpdate
     );
-    setTodos((prevTodos) => {
-      const updatedTodos = prevTodos.map((todoItem) => {
-        if (todoItem._id === todo._id) {
-          return {
-            ...todoItem,
-            completed: !todo.completed,
-          };
-        }
-        return todoItem;
-      });
-      return updatedTodos;
-    });
+    return updatedTodo;
   } catch (error) {
-    console.log(error);
     throw new Error();
   }
 };

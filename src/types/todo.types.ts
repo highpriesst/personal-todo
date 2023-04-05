@@ -7,6 +7,12 @@ export interface ITodo {
   updatedAt?: string;
 }
 
+export interface ITodoForm {
+  title: string;
+  description: string;
+  completed?: boolean;
+}
+
 export interface TodoProps {
   todo: ITodo;
 }
@@ -15,17 +21,5 @@ export type ApiDataType = {
   message: string;
   status: string;
   todos: ITodo[];
+  todo?: ITodo;
 };
-
-export interface ITodoProps {
-  index: number;
-  title: string;
-  description: string;
-  completed: boolean;
-}
-
-export interface TodoFormData {
-  title: string;
-  description: string;
-  completed: boolean;
-}
