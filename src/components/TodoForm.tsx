@@ -28,7 +28,7 @@ const TodoForm: React.FC<IFormProps> = ({ handleAddTodo }) => {
 
   return (
     <form
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-4 shadow-md p-2 rounded-md"
       onSubmit={(e) => handleAddTodo(e, formData)}>
       <div className="flex flex-col">
         <label htmlFor="title" className="text-lg font-bold mb-2">
