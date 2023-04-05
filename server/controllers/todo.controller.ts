@@ -30,7 +30,7 @@ export const addTodo = async (
     const todo: ITodo = new Todo({
       title: body.title,
       description: body.description,
-      completed: body.completed,
+      completed: false,
     });
 
     const newTodo = Todo.create(todo);
