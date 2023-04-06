@@ -27,16 +27,16 @@ export const addTodo = async (
     const body = req.body as Pick<ITodo, "title" | "description" | "completed">;
 
     //Creating new Todo from picked information
-    const todo: ITodo = new Todo({
+    const newTodo: ITodo = await Todo.create({
       title: body.title,
       description: body.description,
       completed: false,
     });
 
-    const newTodo = Todo.create(todo);
-
     //Getting all todos to show all todos to the user.
     const allTodos: ITodo[] = await Todo.find();
+
+    // console.log("AddTodo called from server");
 
     res.status(201).json({
       message: "New todo added to the list!",
