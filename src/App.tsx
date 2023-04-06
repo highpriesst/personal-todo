@@ -28,11 +28,13 @@ function App() {
     formData: ITodoForm
   ): Promise<void> => {
     e.preventDefault();
+
     try {
       const { status, data } = await addTodo(formData);
       if (status !== 201) {
         throw new Error("Error! Todo not saved");
       }
+
       setTodos(data.todos);
     } catch (error) {
       console.log(error);

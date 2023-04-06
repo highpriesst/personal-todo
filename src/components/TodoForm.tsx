@@ -18,8 +18,20 @@ const TodoForm: React.FC<IFormProps> = ({ handleAddTodo }) => {
     });
   }
 
+  // function handleSubmit(e: FormEvent) {
+  //   e.preventDefault();
+
+  //   setFormData({
+  //     title: "",
+  //     description: "",
+  //   });
+
+  //   handleAddTodo(e, formData);
+  // }
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    handleAddTodo(e, formData); // call parent component's function to add the todo
     setFormData({
       title: "",
       description: "",

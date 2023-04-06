@@ -29,7 +29,6 @@ export const addTodo = async (
       baseUrl + "/api/todos",
       todo
     );
-    // console.log(formData);
 
     return saveTodo;
   } catch (error) {
