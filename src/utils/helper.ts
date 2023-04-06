@@ -45,7 +45,7 @@ export const updateTodo = async (
 ): Promise<AxiosResponse<ApiDataType>> => {
   try {
     const todoUpdate: Pick<ITodo, "completed"> = {
-      completed: true,
+      completed: !todo.completed,
     };
     const updatedTodo: AxiosResponse<ApiDataType> = await axios.put(
       `${baseUrl}/edit/${todo._id}`,
@@ -58,3 +58,17 @@ export const updateTodo = async (
 };
 
 //Delete
+
+export const deleteTodo = async (
+  _id: string
+): Promise<AxiosResponse<ApiDataType>> => {
+  try {
+    const deletedTodo: AxiosResponse<ApiDataType> = await axios.delete(
+      `${baseUrl}/delete/${_id}`
+    );
+
+    return deletedTodo;
+  } catch (error) {
+    throw new Error();
+  }
+};
