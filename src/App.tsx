@@ -3,7 +3,7 @@ import TodoForm from "./components/TodoForm";
 import { ITodo, ITodoForm } from "./types/todo.types";
 import { useState, useEffect } from "react";
 
-import { getTodos, addTodo, updateTodo } from "./utils/helper";
+import { getTodos, addTodo, updateTodo, deleteTodo } from "./utils/helper";
 
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
@@ -50,6 +50,19 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const handleDeleteTodo = (_id: string): void => {
+    deleteTodo(_id)
+      .then(({ status, data }) => {
+        if (status !== 200) {
+          throw new Error("Error! Todo not deleted");
+        }
+        console.log(data.todos);
+
+        setTodos(data.todos);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     fetchTodos();
   }, [setTodos]);
@@ -72,6 +85,7 @@ function App() {
                 key={todo._id}
                 todo={todo}
                 handleUpdateTodo={handleUpdateTodo}
+                handleDeleteTodo={handleDeleteTodo}
               />
             ))}
           </div>

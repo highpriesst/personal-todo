@@ -3,9 +3,14 @@ import { TodoProps, ITodo } from "../types/todo.types";
 
 type Props = TodoProps & {
   handleUpdateTodo: (todo: ITodo) => void;
+  handleDeleteTodo: (_id: string) => void;
 };
 
-const Todo: React.FC<Props> = ({ todo, handleUpdateTodo }) => {
+const Todo: React.FC<Props> = ({
+  todo,
+  handleUpdateTodo,
+  handleDeleteTodo,
+}) => {
   const checkTodo: string = todo.completed ? `line-through` : "";
   const buttonColor: string = todo.completed ? `bg-gray-300` : `bg-green-500`;
 
@@ -20,15 +25,12 @@ const Todo: React.FC<Props> = ({ todo, handleUpdateTodo }) => {
       <div className="flex">
         <button
           onClick={() => handleUpdateTodo(todo)}
-          className={`text-white rounded-md px-4 py-2 ${buttonColor} ${
-            todo.completed ? `hide-button` : ""
-          }`}>
+          className={`${buttonColor} text-white rounded-md px-4 py-2 ml-2`}>
           Done
         </button>
         <button
           className="text-white rounded-md px-4 py-2 bg-red-500 ml-2"
-          // onClick={() => deleteTodo(todo._id)}
-        >
+          onClick={() => handleDeleteTodo(todo._id)}>
           Delete
         </button>
       </div>
