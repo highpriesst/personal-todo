@@ -12,6 +12,8 @@ To install the application, clone the repository to your local machine and run t
 yarn install
 ```
 
+![Screenshot](assets/screenshot-1.png)
+
 
 
 # Tech 
