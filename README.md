@@ -1,6 +1,6 @@
 # Personal Todo List
 
-This is a simple command-line application for managing my personal to-do list.
+This is a simple application for managing my personal to-do list.
 
 
 
